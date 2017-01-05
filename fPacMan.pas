@@ -39,12 +39,16 @@ type
     ImgGhost1E: TImage;
     ImgGhost1N: TImage;
     ImgGhost1S: TImage;
+    ImgGhost1: TImage;
     ImgGhost1W: TImage;
     ImgGhost2S: TImage;
+    ImgGhost2: TImage;
     ImgGhost2W: TImage;
     ImgGhost3S: TImage;
+    ImgGhost3: TImage;
     ImgGhost3W: TImage;
     ImgGhost4S: TImage;
+    ImgGhost4: TImage;
     ImgGhost4W: TImage;
     ImgGhost4N: TImage;
     ImgGhost4E: TImage;
@@ -740,10 +744,10 @@ begin
       HappyGhost[n].Dir := -(1+random)*HappyGhostSpeed;
   for n:=1 to 4 do
     HappyGhost[n].x:=HappyGhost[n].x+HappyGhost[n].dir;
-  ImgGhost1S.Left := round(HappyGhost[1].x);
-  ImgGhost2S.Left := round(HappyGhost[2].x);
-  ImgGhost3S.Left := round(HappyGhost[3].x);
-  ImgGhost4S.Left := round(HappyGhost[4].x);
+  ImgGhost1.Left := round(HappyGhost[1].x);
+  ImgGhost2.Left := round(HappyGhost[2].x);
+  ImgGhost3.Left := round(HappyGhost[3].x);
+  ImgGhost4.Left := round(HappyGhost[4].x);
 end;
 
 procedure TfrmPacman.OnSpriteTimer(Sender: TObject);

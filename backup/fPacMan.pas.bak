@@ -671,7 +671,7 @@ begin
       else
       begin
         dir:=GetGhostDir (XY,dir);
-        //Sprite[aSpriteInx].SpImg := FindComponent('ImgGhost'+IntToStr(aSpriteInx)+dir) as TImage;
+        Sprite[aSpriteInx].SpImg := FindComponent('ImgGhost'+IntToStr(aSpriteInx)+dir) as TImage;
       end;
       if dir in ['E','W'] then sy:=0 else sx:=0; //correct partial displacements
       if aSpriteInx=0 then CollisionDetect(XY);  //only for The Man himself...

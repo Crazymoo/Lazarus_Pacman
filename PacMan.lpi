@@ -47,8 +47,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="111"/>
-        <CursorPos X="15" Y="131"/>
+        <TopLine Value="178"/>
+        <CursorPos X="12" Y="750"/>
         <UsageCount Value="38"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -90,123 +90,123 @@
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="fPacMan.pas"/>
-        <Caret Line="676" TopLine="653"/>
+        <Caret Line="678" Column="11" TopLine="649"/>
       </Position1>
       <Position2>
         <Filename Value="fPacMan.pas"/>
-        <Caret Line="677" TopLine="653"/>
+        <Caret Line="674" TopLine="649"/>
       </Position2>
       <Position3>
         <Filename Value="fPacMan.pas"/>
-        <Caret Line="678" Column="11" TopLine="653"/>
+        <Caret Line="676" TopLine="649"/>
       </Position3>
       <Position4>
         <Filename Value="fPacMan.pas"/>
-        <Caret Line="674" TopLine="653"/>
+        <Caret Line="677" TopLine="649"/>
       </Position4>
       <Position5>
         <Filename Value="fPacMan.pas"/>
-        <Caret Line="673" Column="43" TopLine="653"/>
+        <Caret Line="680" TopLine="649"/>
       </Position5>
       <Position6>
         <Filename Value="fPacMan.pas"/>
-        <Caret Line="393" Column="4" TopLine="385"/>
+        <Caret Line="681" TopLine="649"/>
       </Position6>
       <Position7>
         <Filename Value="fPacMan.pas"/>
-        <Caret Line="551" Column="32" TopLine="543"/>
+        <Caret Line="683" TopLine="649"/>
       </Position7>
       <Position8>
         <Filename Value="fPacMan.pas"/>
-        <Caret Line="587" Column="20" TopLine="550"/>
+        <Caret Line="684" TopLine="649"/>
       </Position8>
       <Position9>
         <Filename Value="fPacMan.pas"/>
-        <Caret Line="678" Column="11" TopLine="649"/>
+        <Caret Line="657" TopLine="649"/>
       </Position9>
       <Position10>
         <Filename Value="fPacMan.pas"/>
-        <Caret Line="674" TopLine="649"/>
+        <Caret Line="686" TopLine="649"/>
       </Position10>
       <Position11>
         <Filename Value="fPacMan.pas"/>
-        <Caret Line="676" TopLine="649"/>
+        <Caret Line="674" TopLine="649"/>
       </Position11>
       <Position12>
         <Filename Value="fPacMan.pas"/>
-        <Caret Line="677" TopLine="649"/>
+        <Caret Line="676" TopLine="649"/>
       </Position12>
       <Position13>
         <Filename Value="fPacMan.pas"/>
-        <Caret Line="680" TopLine="649"/>
+        <Caret Line="677" TopLine="649"/>
       </Position13>
       <Position14>
         <Filename Value="fPacMan.pas"/>
-        <Caret Line="681" TopLine="649"/>
+        <Caret Line="680" TopLine="649"/>
       </Position14>
       <Position15>
         <Filename Value="fPacMan.pas"/>
-        <Caret Line="683" TopLine="649"/>
+        <Caret Line="681" TopLine="649"/>
       </Position15>
       <Position16>
         <Filename Value="fPacMan.pas"/>
-        <Caret Line="684" TopLine="649"/>
+        <Caret Line="683" TopLine="649"/>
       </Position16>
       <Position17>
         <Filename Value="fPacMan.pas"/>
-        <Caret Line="657" TopLine="649"/>
+        <Caret Line="131" Column="25" TopLine="111"/>
       </Position17>
       <Position18>
         <Filename Value="fPacMan.pas"/>
-        <Caret Line="686" TopLine="649"/>
+        <Caret Line="527" Column="15" TopLine="490"/>
       </Position18>
       <Position19>
         <Filename Value="fPacMan.pas"/>
-        <Caret Line="674" TopLine="649"/>
+        <Caret Line="131" Column="25" TopLine="99"/>
       </Position19>
       <Position20>
         <Filename Value="fPacMan.pas"/>
-        <Caret Line="676" TopLine="649"/>
+        <Caret Line="599" Column="14" TopLine="562"/>
       </Position20>
       <Position21>
         <Filename Value="fPacMan.pas"/>
-        <Caret Line="677" TopLine="649"/>
+        <Caret Line="653" Column="32" TopLine="648"/>
       </Position21>
       <Position22>
         <Filename Value="fPacMan.pas"/>
-        <Caret Line="680" TopLine="649"/>
+        <Caret Line="753" Column="32" TopLine="732"/>
       </Position22>
       <Position23>
         <Filename Value="fPacMan.pas"/>
-        <Caret Line="681" TopLine="649"/>
+        <Caret Line="131" Column="25" TopLine="111"/>
       </Position23>
       <Position24>
         <Filename Value="fPacMan.pas"/>
-        <Caret Line="683" TopLine="649"/>
+        <Caret Line="599" Column="14" TopLine="562"/>
       </Position24>
       <Position25>
         <Filename Value="fPacMan.pas"/>
-        <Caret Line="131" Column="25" TopLine="111"/>
+        <Caret Line="674" Column="32" TopLine="635"/>
       </Position25>
       <Position26>
         <Filename Value="fPacMan.pas"/>
-        <Caret Line="527" Column="15" TopLine="490"/>
+        <Caret Line="758" Column="11" TopLine="732"/>
       </Position26>
       <Position27>
         <Filename Value="fPacMan.pas"/>
-        <Caret Line="131" Column="25" TopLine="99"/>
+        <Caret Line="746" Column="12" TopLine="729"/>
       </Position27>
       <Position28>
         <Filename Value="fPacMan.pas"/>
-        <Caret Line="599" Column="14" TopLine="562"/>
+        <Caret Line="747" Column="12" TopLine="730"/>
       </Position28>
       <Position29>
         <Filename Value="fPacMan.pas"/>
-        <Caret Line="653" Column="32" TopLine="648"/>
+        <Caret Line="748" Column="12" TopLine="731"/>
       </Position29>
       <Position30>
         <Filename Value="fPacMan.pas"/>
-        <Caret Line="753" Column="32" TopLine="732"/>
+        <Caret Line="749" Column="12" TopLine="732"/>
       </Position30>
     </JumpHistory>
   </ProjectOptions>
