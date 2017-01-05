@@ -6,7 +6,7 @@ interface
 
 uses
   LCLIntf, Messages, SysUtils, Classes, Graphics, Controls, Forms,
-  Dialogs, ExtCtrls, StdCtrls,{QControls, jpeg,} Buttons, lcltype, ImgList, LResources;
+  Dialogs, ExtCtrls, StdCtrls,{QControls, jpeg,} Buttons, lcltype, LResources;
 
 const
   GridXSize   = 30;
@@ -32,15 +32,40 @@ type
 
   TField = array[0..GridYSize-1] of string[GridXSize];
 
+  { TfrmPacman }
+
   TfrmPacman = class(TForm)
+    ImgBonus1: TImage;
+    ImgGhost1E: TImage;
+    ImgGhost1N: TImage;
+    ImgGhost1S: TImage;
+    ImgGhost1W: TImage;
+    ImgGhost2S: TImage;
+    ImgGhost2W: TImage;
+    ImgGhost3S: TImage;
+    ImgGhost3W: TImage;
+    ImgGhost4S: TImage;
+    ImgGhost4W: TImage;
+    ImgGhost4N: TImage;
+    ImgGhost4E: TImage;
+    imgPacman: TImage;
+    ImgGhost2N: TImage;
+    ImgGhost2E: TImage;
+    ImgGhost3N: TImage;
+    ImgGhost3E: TImage;
+    img1Left: TImage;
+    img2Left: TImage;
+    ImgScared1: TImage;
+    ImgScared2: TImage;
+    lbl1UP: TLabel;
+    lblScore1: TLabel;
+    lblHiScoreLabel: TLabel;
+    lbl2UP: TLabel;
+    lblHiScore: TLabel;
+    lblScore2: TLabel;
     pnMain: TPanel;
     img:     TImage;
-    ImgGhost1: TImage;
-    ImgGhost2: TImage;
-    ImgGhost3: TImage;
-    ImgGhost4: TImage;
     SpriteTimer: TTimer;
-    Label1: TLabel;
     pnBonusBarOuter: TPanel;
     pnBonusBarInner: TPanel;
     pnScareBarOuter: TPanel;
@@ -48,11 +73,6 @@ type
     ImgScared: TImage;
     ImgBonus: TImage;
     lbBonusCnt: TLabel;
-    Label3: TLabel;
-    lbLives: TLabel;
-    lbScore: TLabel;
-    Label6: TLabel;
-    lbHiscore: TLabel;
     lbGhostCnt: TLabel;
 // Initializing code
     procedure FormCreate(Sender: TObject);
@@ -330,9 +350,9 @@ procedure TfrmPacman.UpdateScore();
 begin
   if Score>HiScore then HiScore:=Score;
   // the updates are needed to see new values during code loops (ShowText)
-  lbScore.Caption   := inttostr(Score);     lbScore.Update;
-  lbHiScore.Caption := inttostr(HiScore);   lbHiscore.Update;
-  lbLives.Caption   := inttostr(LivesLeft); lbLives.Update;
+  lblScore1.Caption   := inttostr(Score);     lblScore1.Update;
+  lblHiScore.Caption := inttostr(HiScore);   lblHiScore.Update;
+  //lbLives.Caption   := inttostr(LivesLeft); lbLives.Update;
   lbBonusCnt.Caption:= inttostr(BonusCnt);  lbBonusCnt.Update;
   lbGhostCnt.Caption:= inttostr(GhostCnt);  lbGhostCnt.Update;
 end;
@@ -370,11 +390,11 @@ end;
 
 procedure TfrmPacman.InitSprites();
 begin
-  InitSprite(Sprite[0],ImgScared,PacmanSpeed); // the image is overwritten later
-  InitSprite(Sprite[1],ImgGhost1,GhostSpeedNormal);
-  InitSprite(Sprite[2],ImgGhost2,GhostSpeedNormal);
-  InitSprite(Sprite[3],ImgGhost3,GhostSpeedNormal);
-  InitSprite(Sprite[4],ImgGhost4,GhostSpeedNormal);
+  InitSprite(Sprite[0],imgPacman,PacmanSpeed);
+  InitSprite(Sprite[1],ImgGhost1S,GhostSpeedNormal);
+  InitSprite(Sprite[2],ImgGhost2S,GhostSpeedNormal);
+  InitSprite(Sprite[3],ImgGhost3S,GhostSpeedNormal);
+  InitSprite(Sprite[4],ImgGhost4S,GhostSpeedNormal);
   InitSprite(Sprite[5],ImgBonus ,BonusSpeed);
 end;
 
@@ -382,10 +402,10 @@ procedure TfrmPacman.InitHappyGhost();
 var n:integer;
 begin
   HappyGhost[0].X:=250;
-  HappyGhost[1].X:=ImgGhost1.left;
-  HappyGhost[2].X:=ImgGhost2.left;
-  HappyGhost[3].X:=ImgGhost3.left;
-  HappyGhost[4].X:=ImgGhost4.left;
+  HappyGhost[1].X:=ImgGhost1S.left;
+  HappyGhost[2].X:=ImgGhost2S.left;
+  HappyGhost[3].X:=ImgGhost3S.left;
+  HappyGhost[4].X:=ImgGhost4S.left;
   HappyGhost[5].X:=480;
   for n:=1 to 4 do HappyGhost[n].Dir:=HappyGhostSpeed;
 end;
@@ -454,10 +474,10 @@ begin
     Sprite[3].spImg.Picture.Assign(ImgScared.Picture); Sprite[3].Spd:=GhostSpeedScared;
     Sprite[4].spImg.Picture.Assign(ImgScared.Picture); Sprite[4].Spd:=GhostSpeedScared;
   end else begin        // assign normal ghost images and set speed to normal
-    Sprite[1].spImg.Picture.Assign(ImgGhost1.Picture); Sprite[1].Spd:=GhostSpeedNormal;
-    Sprite[2].spImg.Picture.Assign(ImgGhost2.Picture); Sprite[2].Spd:=GhostSpeedNormal;
-    Sprite[3].spImg.Picture.Assign(ImgGhost3.Picture); Sprite[3].Spd:=GhostSpeedNormal;
-    Sprite[4].spImg.Picture.Assign(ImgGhost4.Picture); Sprite[4].Spd:=GhostSpeedNormal;
+    Sprite[1].spImg.Picture.Assign(ImgGhost1S.Picture); Sprite[1].Spd:=GhostSpeedNormal;
+    Sprite[2].spImg.Picture.Assign(ImgGhost2S.Picture); Sprite[2].Spd:=GhostSpeedNormal;
+    Sprite[3].spImg.Picture.Assign(ImgGhost3S.Picture); Sprite[3].Spd:=GhostSpeedNormal;
+    Sprite[4].spImg.Picture.Assign(ImgGhost4S.Picture); Sprite[4].Spd:=GhostSpeedNormal;
   end;
 end;
 
@@ -631,7 +651,8 @@ begin
 end;
 
 procedure TFrmPacman.MoveSprite(aSpriteInx:integer);
-var oXY:TPoint;
+var
+    oXY:TPoint;
 begin
   with Sprite[aSpriteInx] do begin
     // change position depending on direction
@@ -647,7 +668,11 @@ begin
     if (XY.x<>oXY.x) or (XY.y<>oXY.y) then begin
       if   aSpriteInx=0
       then dir:=GetPacmanDir(XY,dir)
-      else dir:=GetGhostDir (XY,dir);
+      else
+      begin
+        dir:=GetGhostDir (XY,dir);
+        Sprite[aSpriteInx].SpImg := FindComponent('ImgGhost'+IntToStr(aSpriteInx)+dir) as TImage;
+      end;
       if dir in ['E','W'] then sy:=0 else sx:=0; //correct partial displacements
       if aSpriteInx=0 then CollisionDetect(XY);  //only for The Man himself...
     end;
@@ -715,10 +740,10 @@ begin
       HappyGhost[n].Dir := -(1+random)*HappyGhostSpeed;
   for n:=1 to 4 do
     HappyGhost[n].x:=HappyGhost[n].x+HappyGhost[n].dir;
-  ImgGhost1.Left := round(HappyGhost[1].x);
-  ImgGhost2.Left := round(HappyGhost[2].x);
-  ImgGhost3.Left := round(HappyGhost[3].x);
-  ImgGhost4.Left := round(HappyGhost[4].x);
+  ImgGhost1S.Left := round(HappyGhost[1].x);
+  ImgGhost2S.Left := round(HappyGhost[2].x);
+  ImgGhost3S.Left := round(HappyGhost[3].x);
+  ImgGhost4S.Left := round(HappyGhost[4].x);
 end;
 
 procedure TfrmPacman.OnSpriteTimer(Sender: TObject);

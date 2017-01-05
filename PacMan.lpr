@@ -4,7 +4,7 @@ program PacMan;
 
 uses
   Forms, Interfaces,
-  fPacMan in 'fPacMan.pas' {frmPacman};
+  fPacMan in 'fPacMan.pas';
 
 {$R *.res}
 
