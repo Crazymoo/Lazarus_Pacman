@@ -14,11 +14,11 @@ const
   MsgRestartGame = wm_User+123;
 
 type
-  TStr4 = string[4];   // kan contain a set of N,E,S,W
+  TStr4 = string[4];   // can contain a set of N,E,S,W
   TSprite=record
-    SpImg   :TImage;   // plaatje van het spook
-    XY      :TPoint;   // grid x en y
-    Sx,Sy   :double;   // smooth x en y tussen 0 en 1
+    SpImg   :TImage;   // picture of the ghost
+    XY      :TPoint;   // grid x,y
+    Sx,Sy   :double;   // smooth x,y between 0 and 1
     Dir     :char;     // N,E,S,W
     Spd     :double;
     StartPos:TPoint;
@@ -36,27 +36,27 @@ type
 
   TfrmPacman = class(TForm)
     ImgBonus1: TImage;
-    ImgGhost1E: TImage;
+    ImgGhost1W: TImage;
     ImgGhost1N: TImage;
     ImgGhost1S: TImage;
     ImgGhost1: TImage;
-    ImgGhost1W: TImage;
+    ImgGhost1E: TImage;
     ImgGhost2S: TImage;
     ImgGhost2: TImage;
-    ImgGhost2W: TImage;
+    ImgGhost2E: TImage;
     ImgGhost3S: TImage;
     ImgGhost3: TImage;
-    ImgGhost3W: TImage;
+    ImgGhost3E: TImage;
     ImgGhost4S: TImage;
     ImgGhost4: TImage;
-    ImgGhost4W: TImage;
-    ImgGhost4N: TImage;
     ImgGhost4E: TImage;
+    ImgGhost4N: TImage;
+    ImgGhost4W: TImage;
     imgPacman: TImage;
     ImgGhost2N: TImage;
-    ImgGhost2E: TImage;
+    ImgGhost2W: TImage;
     ImgGhost3N: TImage;
-    ImgGhost3E: TImage;
+    ImgGhost3W: TImage;
     img1Left: TImage;
     img2Left: TImage;
     ImgScared1: TImage;
@@ -337,15 +337,7 @@ begin
       'W': Pie(1,0,28,28,28,14-PacMouthOpen,28,14+PacMouthOpen); // to the left
       'N': Pie(1,0,28,28,14-PacMouthOpen,0 ,14+PacMouthOpen,0 ); // to the top
       'S': Pie(1,0,28,28,14+PacMouthOpen,28,14-PacMouthOpen,28); // to the bottom
-      else begin // When Pacman is resting from his walk draw a happy face...
-             Pie(0,0,28,28,0,0,0,0);     // whole face area
-             Brush.color:=clBlack;       //
-             pen.color:=clBlack;         //
-             Pie(7,9,12,14,0,0,0,0);     // left eye
-             Pie(21,9,16,14,0,0,0,0);    // right eye
-             pen.width:=3;               //
-             arc(0,-10,28,21,5,28,23,28);//mouth
-           end;
+      else Sprite[0].spImg.Picture.Assign(imgPacman.Picture);
     end;
   end;
 end;
@@ -406,10 +398,10 @@ procedure TfrmPacman.InitHappyGhost();
 var n:integer;
 begin
   HappyGhost[0].X:=250;
-  HappyGhost[1].X:=ImgGhost1S.left;
-  HappyGhost[2].X:=ImgGhost2S.left;
-  HappyGhost[3].X:=ImgGhost3S.left;
-  HappyGhost[4].X:=ImgGhost4S.left;
+  HappyGhost[1].X:=ImgGhost1.left;
+  HappyGhost[2].X:=ImgGhost2.left;
+  HappyGhost[3].X:=ImgGhost3.left;
+  HappyGhost[4].X:=ImgGhost4.left;
   HappyGhost[5].X:=480;
   for n:=1 to 4 do HappyGhost[n].Dir:=HappyGhostSpeed;
 end;
@@ -478,10 +470,10 @@ begin
     Sprite[3].spImg.Picture.Assign(ImgScared.Picture); Sprite[3].Spd:=GhostSpeedScared;
     Sprite[4].spImg.Picture.Assign(ImgScared.Picture); Sprite[4].Spd:=GhostSpeedScared;
   end else begin        // assign normal ghost images and set speed to normal
-    Sprite[1].spImg.Picture.Assign(ImgGhost1S.Picture); Sprite[1].Spd:=GhostSpeedNormal;
-    Sprite[2].spImg.Picture.Assign(ImgGhost2S.Picture); Sprite[2].Spd:=GhostSpeedNormal;
-    Sprite[3].spImg.Picture.Assign(ImgGhost3S.Picture); Sprite[3].Spd:=GhostSpeedNormal;
-    Sprite[4].spImg.Picture.Assign(ImgGhost4S.Picture); Sprite[4].Spd:=GhostSpeedNormal;
+    Sprite[1].spImg.Picture.Assign(ImgGhost1.Picture); Sprite[1].Spd:=GhostSpeedNormal;
+    Sprite[2].spImg.Picture.Assign(ImgGhost2.Picture); Sprite[2].Spd:=GhostSpeedNormal;
+    Sprite[3].spImg.Picture.Assign(ImgGhost3.Picture); Sprite[3].Spd:=GhostSpeedNormal;
+    Sprite[4].spImg.Picture.Assign(ImgGhost4.Picture); Sprite[4].Spd:=GhostSpeedNormal;
   end;
 end;
 
@@ -657,6 +649,7 @@ end;
 procedure TFrmPacman.MoveSprite(aSpriteInx:integer);
 var
     oXY:TPoint;
+    tmpImage: TImage;
 begin
   with Sprite[aSpriteInx] do begin
     // change position depending on direction
@@ -675,7 +668,11 @@ begin
       else
       begin
         dir:=GetGhostDir (XY,dir);
-        Sprite[aSpriteInx].SpImg := FindComponent('ImgGhost'+IntToStr(aSpriteInx)+dir) as TImage;
+        if aSpriteInx < 5 then
+        begin
+          tmpImage := FindComponent('ImgGhost'+IntToStr(aSpriteInx)+dir) as TImage;
+          Sprite[aSpriteInx].spImg.Picture.Assign(tmpImage.Picture);
+        end;
       end;
       if dir in ['E','W'] then sy:=0 else sx:=0; //correct partial displacements
       if aSpriteInx=0 then CollisionDetect(XY);  //only for The Man himself...
@@ -862,7 +859,7 @@ end;
 //   Now that the target is found we have to find "the tentacle that leads back
 //   to the octopus", the shortest way back to the originating point.
 //   This is done by starting at the endpoint, and looking in the surrounding
-//   cells for a valid searchindex that is smaller  than the cells own searchindex.
+//   cells for a valid searchindex that is smSprite[aSpriteInx].spImg.Picture.Assign(tmpImage.Picture);aller  than the cells own searchindex.
 //   Move the cellpointer to the adjacing cell with a smaller index and eventually
 //   you get back to the source.
 //   Imagine a river valley in which a lot of streams go down to the middle. Just

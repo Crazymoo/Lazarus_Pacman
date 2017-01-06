@@ -1,10 +1,10 @@
 object frmPacman: TfrmPacman
   Left = 491
-  Height = 621
+  Height = 622
   Top = 198
   Width = 485
   Caption = 'frmPacman'
-  ClientHeight = 621
+  ClientHeight = 622
   ClientWidth = 485
   Color = clBlack
   Font.Color = clNavy
@@ -555,7 +555,7 @@ object frmPacman: TfrmPacman
     }
     Transparent = True
   end
-  object ImgGhost1W: TImage
+  object ImgGhost1E: TImage
     Left = 36
     Height = 28
     Top = 672
@@ -691,7 +691,7 @@ object frmPacman: TfrmPacman
     }
     Transparent = True
   end
-  object ImgGhost1E: TImage
+  object ImgGhost1W: TImage
     Left = 92
     Height = 28
     Top = 672
@@ -759,7 +759,7 @@ object frmPacman: TfrmPacman
     }
     Transparent = True
   end
-  object ImgGhost2W: TImage
+  object ImgGhost2E: TImage
     Left = 156
     Height = 28
     Top = 672
@@ -895,7 +895,7 @@ object frmPacman: TfrmPacman
     }
     Transparent = True
   end
-  object ImgGhost2E: TImage
+  object ImgGhost2W: TImage
     Left = 212
     Height = 28
     Top = 672
@@ -1031,7 +1031,7 @@ object frmPacman: TfrmPacman
     }
     Transparent = True
   end
-  object ImgGhost4W: TImage
+  object ImgGhost4E: TImage
     Left = 156
     Height = 28
     Top = 640
@@ -1167,7 +1167,7 @@ object frmPacman: TfrmPacman
     }
     Transparent = True
   end
-  object ImgGhost4E: TImage
+  object ImgGhost4W: TImage
     Left = 212
     Height = 28
     Top = 640
@@ -1235,7 +1235,7 @@ object frmPacman: TfrmPacman
     }
     Transparent = True
   end
-  object ImgGhost3W: TImage
+  object ImgGhost3E: TImage
     Left = 276
     Height = 28
     Top = 640
@@ -1390,7 +1390,7 @@ object frmPacman: TfrmPacman
     Stretch = True
     Transparent = True
   end
-  object ImgGhost3E: TImage
+  object ImgGhost3W: TImage
     Left = 332
     Height = 28
     Top = 640
@@ -1622,6 +1622,7 @@ object frmPacman: TfrmPacman
       0000
     }
     Transparent = True
+    Visible = False
   end
   object ImgGhost3: TImage
     Left = 276
@@ -1708,6 +1709,7 @@ object frmPacman: TfrmPacman
     }
     Stretch = True
     Transparent = True
+    Visible = False
   end
   object ImgGhost1: TImage
     Left = 304
@@ -1736,6 +1738,7 @@ object frmPacman: TfrmPacman
       0000
     }
     Transparent = True
+    Visible = False
   end
   object ImgGhost2: TImage
     Left = 332
@@ -1764,6 +1767,7 @@ object frmPacman: TfrmPacman
       0000
     }
     Transparent = True
+    Visible = False
   end
   object SpriteTimer: TTimer
     Enabled = False
