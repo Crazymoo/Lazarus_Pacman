@@ -1,10 +1,10 @@
 object frmPacman: TfrmPacman
   Left = 491
-  Height = 622
+  Height = 618
   Top = 198
   Width = 485
   Caption = 'frmPacman'
-  ClientHeight = 622
+  ClientHeight = 618
   ClientWidth = 485
   Color = clBlack
   Font.Color = clNavy
@@ -14,34 +14,6 @@ object frmPacman: TfrmPacman
   OnCreate = FormCreate
   OnKeyDown = FormKeyDown
   LCLVersion = '1.6.0.4'
-  object ImgScared: TImage
-    Left = 294
-    Height = 28
-    Top = 538
-    Width = 28
-    Picture.Data = {
-      07544269746D617036020000424D360200000000000076000000280000001C00
-      00001C0000000100040000000000C00100000000000000000000100000000000
-      0000000000000000800000800000008080008000000080008000808000008080
-      8000C0C0C0000000FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFF
-      FF00000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000004000004000000
-      0000000000000000000000000000000000000000400004440004440000400000
-      00000000C4000CCC000CCC0004C0000000000000CC40CCCC404CCCC04CC00000
-      00000000CCC4CCCCC0CCCCC4CCC0000000000000CCCCCCCCCCCCCCCCCCC00000
-      00000000CC7CCC77CCC77CCC7CC0000000000000CCF8C8FF8C8FF8C8FCC00000
-      00000000CCC8FFCC8FFCC8FFCCC0000000000000CCCC7CCCC7CCCC7CCCC00000
-      00000000CCCCCCCCCCCCCCCCCCC0000000000000CCCCCCCCCCCCCCCCCCC00000
-      00000000CCCCCCCCCCCCCCCCCCC0000000000000CCCCC8FFCCCFF8CCCCC00000
-      000000004CCCC8FFCCCFF8CCCC400000000000004CCCC788CCC887CCCC400000
-      000000000CCCCCCCCCCCCCCCCC000000000000000CCCCCCCCCCCCCCCCC000000
-      0000000004CCCCCCCCCCCCCCC400000000000000004CCCCCCCCCCCCC40000000
-      000000000004CCCCCCCCCCC40000000000000000000000444444400000000000
-      0000000000000000000000000000000000000000000000000000444440000000
-      0000
-    }
-    Transparent = True
-  end
   object ImgBonus: TImage
     Left = 392
     Height = 28
@@ -117,48 +89,6 @@ object frmPacman: TfrmPacman
       Top = 1
       Width = 482
       OnMouseDown = imgMouseDown
-    end
-  end
-  object pnBonusBarOuter: TPanel
-    Left = 384
-    Height = 11
-    Top = 641
-    Width = 89
-    BevelOuter = bvLowered
-    ClientHeight = 11
-    ClientWidth = 89
-    Color = clGray
-    ParentColor = False
-    TabOrder = 1
-    object pnBonusBarInner: TPanel
-      Left = 1
-      Height = 9
-      Top = 1
-      Width = 15
-      Align = alLeft
-      BevelOuter = bvNone
-      TabOrder = 0
-    end
-  end
-  object pnScareBarOuter: TPanel
-    Left = 384
-    Height = 11
-    Top = 657
-    Width = 89
-    BevelOuter = bvLowered
-    ClientHeight = 11
-    ClientWidth = 89
-    Color = clGray
-    ParentColor = False
-    TabOrder = 2
-    object pnScareBarInner: TPanel
-      Left = 1
-      Height = 9
-      Top = 1
-      Width = 41
-      Align = alLeft
-      BevelOuter = bvNone
-      TabOrder = 0
     end
   end
   object lbl1UP: TLabel
@@ -1768,6 +1698,28 @@ object frmPacman: TfrmPacman
     }
     Transparent = True
     Visible = False
+  end
+  object lblScareTimer: TLabel
+    Left = 368
+    Height = 13
+    Top = 641
+    Width = 108
+    AutoSize = False
+    Caption = ' Scare Timer: '
+    Color = clWhite
+    ParentColor = False
+    Transparent = False
+  end
+  object lblBonusTimer: TLabel
+    Left = 368
+    Height = 13
+    Top = 664
+    Width = 108
+    AutoSize = False
+    Caption = ' Bonus Timer:'
+    Color = clWhite
+    ParentColor = False
+    Transparent = False
   end
   object SpriteTimer: TTimer
     Enabled = False

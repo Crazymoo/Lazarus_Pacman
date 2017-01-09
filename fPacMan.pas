@@ -61,6 +61,8 @@ type
     img2Left: TImage;
     ImgScared1: TImage;
     ImgScared2: TImage;
+    lblScareTimer: TLabel;
+    lblBonusTimer: TLabel;
     lbl1UP: TLabel;
     lblScore1: TLabel;
     lblHiScoreLabel: TLabel;
@@ -70,11 +72,6 @@ type
     pnMain: TPanel;
     img:     TImage;
     SpriteTimer: TTimer;
-    pnBonusBarOuter: TPanel;
-    pnBonusBarInner: TPanel;
-    pnScareBarOuter: TPanel;
-    pnScareBarInner: TPanel;
-    ImgScared: TImage;
     ImgBonus: TImage;
     lbBonusCnt: TLabel;
     lbGhostCnt: TLabel;
@@ -87,7 +84,8 @@ type
 // Debug & Test
     procedure imgMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
   private
-    Pause:boolean;
+    Pause, areScared:boolean;
+    flip:Integer;
     LivesLeft:integer;
     BonusCnt :integer;
     GhostCnt :integer;
@@ -255,10 +253,10 @@ procedure TfrmPacman.ShowText(aText:string);
 var n,x,y:integer;
 begin       
   img.Canvas.brush.Color:=clBlack; //textbackground is black
-  img.Canvas.Font.Size:=40;        //make text really big
+  img.Canvas.Font.Size:=18;        //make text really big
   // position text in the middle of the field
   x:=pnMain.ClientWidth div 2-img.Canvas.TextWidth(aText) div 2;
-  y:=pnMain.ClientHeight div 2-img.Canvas.TextHeight(aText) div 2;
+  y:=pnMain.ClientHeight div 2-img.Canvas.TextHeight(aText) div 2 + 30;
   for n:=0 to 9 do begin // flash for 10 times 300 msec
     img.Canvas.Font.Color:=clRed;
     img.Canvas.TextOut(x,y,aText);
@@ -417,6 +415,8 @@ begin
   BonusCnt :=0;
   GhostCnt :=0;
   Pause    :=false;
+  areScared:=False;
+  flip     :=1;
   pacMouthopen:=5; pacMouthopenDir:=2; //startvalues for open mouth of pacman
   for x:=0 to GridXSize-1 do for y:=0 to GridYSize-1 do begin
     case aField[y,x+1] of
@@ -465,15 +465,17 @@ end;
 procedure TfrmPacman.SetGhostScared(aScared:boolean);
 begin
   if aScared then begin // assign "scared" images and set speed to scared
-    Sprite[1].spImg.Picture.Assign(ImgScared.Picture); Sprite[1].Spd:=GhostSpeedScared;
-    Sprite[2].spImg.Picture.Assign(ImgScared.Picture); Sprite[2].Spd:=GhostSpeedScared;
-    Sprite[3].spImg.Picture.Assign(ImgScared.Picture); Sprite[3].Spd:=GhostSpeedScared;
-    Sprite[4].spImg.Picture.Assign(ImgScared.Picture); Sprite[4].Spd:=GhostSpeedScared;
+    Sprite[1].spImg.Picture.Assign(ImgScared1.Picture); Sprite[1].Spd:=GhostSpeedScared;
+    Sprite[2].spImg.Picture.Assign(ImgScared1.Picture); Sprite[2].Spd:=GhostSpeedScared;
+    Sprite[3].spImg.Picture.Assign(ImgScared1.Picture); Sprite[3].Spd:=GhostSpeedScared;
+    Sprite[4].spImg.Picture.Assign(ImgScared1.Picture); Sprite[4].Spd:=GhostSpeedScared;
+    areScared:=True;
   end else begin        // assign normal ghost images and set speed to normal
     Sprite[1].spImg.Picture.Assign(ImgGhost1.Picture); Sprite[1].Spd:=GhostSpeedNormal;
     Sprite[2].spImg.Picture.Assign(ImgGhost2.Picture); Sprite[2].Spd:=GhostSpeedNormal;
     Sprite[3].spImg.Picture.Assign(ImgGhost3.Picture); Sprite[3].Spd:=GhostSpeedNormal;
     Sprite[4].spImg.Picture.Assign(ImgGhost4.Picture); Sprite[4].Spd:=GhostSpeedNormal;
+    areScared:=False;
   end;
 end;
 
@@ -554,7 +556,7 @@ begin
   end;
   if (length(s)>1) then begin // more than one direction: make a choice
     BestDir:=GetBestDir(aXY);
-    if (scaretimer=0) and (BestDir<>'-') then begin//
+    if (ScareTimer=0) and (BestDir<>'-') then begin//
       if random < Huntfactor then s:=BestDir; // hunt depends on factor
     end else begin
       delete(s,pos(BestDir,s),1);             // fleeing does not
@@ -668,7 +670,7 @@ begin
       else
       begin
         dir:=GetGhostDir (XY,dir);
-        if aSpriteInx < 5 then
+        if (aSpriteInx < 5) and (not areScared) then
         begin
           tmpImage := FindComponent('ImgGhost'+IntToStr(aSpriteInx)+dir) as TImage;
           Sprite[aSpriteInx].spImg.Picture.Assign(tmpImage.Picture);
@@ -717,17 +719,34 @@ end;
 procedure TfrmPacman.DoScareTimer();
 begin
   // just after superpill is eaten the caretimer is set to ScareTimeOut
-  if scaretimer>=ScareTimeOut then SetGhostScared(true); //frighten them !!
+  if ScareTimer>=ScareTimeOut then SetGhostScared(true); //frighten them !!
   if ScareTimer>0 then begin
     dec(ScareTimer);
+    if ScareTimer <= 100 then
+    begin
+      if ScareTimer MOD 10 = 0 then
+      begin
+        flip:=flip*(-1);
+        if flip > 0 then
+        begin
+          Sprite[1].spImg.Picture.Assign(ImgScared2.Picture);
+          Sprite[2].spImg.Picture.Assign(ImgScared2.Picture);
+          Sprite[3].spImg.Picture.Assign(ImgScared2.Picture);
+          Sprite[4].spImg.Picture.Assign(ImgScared2.Picture);
+        end
+        else
+        begin
+          Sprite[1].spImg.Picture.Assign(ImgScared1.Picture);
+          Sprite[2].spImg.Picture.Assign(ImgScared1.Picture);
+          Sprite[3].spImg.Picture.Assign(ImgScared1.Picture);
+          Sprite[4].spImg.Picture.Assign(ImgScared1.Picture);
+        end;
+      end;
+    end;
     // if scaretimer becomes zero then scare time is over: return to normal
-    if scaretimer=0 then SetGhostScared(false); // fun is over...
-    // update a custom made progressbar on the screen
-    if   ScareTimer>ScareTimeOut div 5
-    then pnScareBarInner.Color:=clLime
-    else pnScareBarInner.Color:=clRed;  // make bar red for last 20% of the time
-    pnScareBarInner.Width:=ScareTimer*pnScareBarOuter.Clientwidth div ScareTimeOut;
+    if ScareTimer=0 then SetGhostScared(false); // fun is over...
   end;
+  //lblScareTimer.Caption := ' Scare Timer: ' + IntToStr(ScareTimer);// for debug only
 end;
 
 procedure TfrmPacman.DoHappyGhosts();
@@ -804,7 +823,7 @@ begin
   for n:=0 to 4 do MoveSprite(n); // for 'Pacman' and each 'Ghost'
   PacmanDir:='-';
   DrawPacman();                   // the images have moved, set the pacmanface
-  ShowText('GET READY !!!');
+  ShowText('READY!');
   PacmanDir:='-';
 end;
 
